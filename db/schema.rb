@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_18_033213) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.bigint "accounts_id", null: false
+    t.bigint "account_id"
     t.string "name"
     t.string "address"
     t.integer "price"
@@ -48,8 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_18_033213) do
     t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["accounts_id"], name: "index_properties_on_accounts_id"
+    t.index ["account_id"], name: "index_properties_on_account_id"
   end
 
-  add_foreign_key "properties", "accounts", column: "accounts_id"
 end

@@ -1,9 +1,11 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: %i[ show edit update destroy ]
+  before_action :authenticate_account!, only: [:new, :create, :destroy]
 
   # GET /properties or /properties.json
   def index
     @properties = Property.all
+    # @properties_by_account = Property.where(accounts_id: current_account)
   end
 
   # GET /properties/1 or /properties/1.json
@@ -12,6 +14,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties/new
   def new
+    puts "the current account id is " + current_account.id.to_s
     @property = Property.new
   end
 
@@ -22,7 +25,9 @@ class PropertiesController < ApplicationController
   # POST /properties or /properties.json
   def create
     @property = Property.new(property_params)
-
+    @property.account_id = current_account.id
+    #@property.accounts_id = current_account.id
+    
     respond_to do |format|
       if @property.save
         format.html { redirect_to property_url(@property), notice: "Property was successfully created." }
@@ -65,6 +70,6 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :address, :price, :rooms, :bathroo)
+      params.require(:property).permit(:name, :address, :price, :rooms, :bathroom)
     end
 end

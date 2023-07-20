@@ -1,4 +1,4 @@
-<%= form_with(model: property) do |form| %>
+<%= form_with(model: property, local: true) do |form| %>
   <% if property.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
@@ -32,8 +32,8 @@
   </div>
 
   <div>
-    <%= form.label :bathroo, style: "display: block" %>
-    <%= form.number_field :bathroo %>
+    <%= form.label :bathroom, style: "display: block" %>
+    <%= form.number_field :bathroom %>
   </div>
 
   <div>

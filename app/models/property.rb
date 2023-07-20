@@ -1,3 +1,4 @@
 class Property < ApplicationRecord
-  belongs_to :accounts
+  belongs_to :account
+  #validates :accounts_id, presence: true
 end
